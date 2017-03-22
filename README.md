@@ -1,5 +1,5 @@
 # Hirsipuutinarvain
-###### Automatic guesser for hirsipuutin
+###### Automatic guesser for hirsipuutin (https://github.com/gofore/hirsipuutin)
 
 
 Usage:
