@@ -43,8 +43,14 @@ def expectedRemaining(ws, l):
     weighted_sum += misses * misses / len(ws)
     return weighted_sum
 
+def findWordWith(ws, g):
+    for i in range(len(ws)):
+        if g in ws[i]:
+            return i
+
 def guess(ws, ls):
-    if len(ws) < 3:
+    # if less than 4 words left guess a whole word
+    if len(ws) < 4:
         return ws.pop(0)
     weights = {}
     hit_counts = getHitCounts(ws, ls)
@@ -56,11 +62,15 @@ def guess(ws, ls):
             weights[letter] = expectedRemaining(ws, letter)-0.5*hit_probability
 
     g = min(weights, key=weights.get)
+    # if there are only a couple of different word possibilities when
+    # g is guessed guess a whole word instead of g
+    if hit_counts[g] < 2:
+        return ws.pop(findWordWith(ws, g))
     ls.remove(g)
     return g
 
 
-print('andriamanitra-hybrid')
+print('andriamanitra')
 
 # save words into lists by length
 words = [[]]*100
