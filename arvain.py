@@ -97,6 +97,11 @@ try:
                     remaining_words = [w for w in remaining_words if w.find(g) < 0]
 
             if status.startswith('WIN') or status.startswith('LOSE') or not status:
+                if status.startswith('WIN'):
+                    # is this cheating? remove words that were already guessed
+                    correct_word = status.split(" ")[2]
+                    words[len(correct_word)].remove(correct_word)
+
                 status = input()
                 break
 except EOFError:
